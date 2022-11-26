@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('auth', '0002_alter_user_adress_alter_user_nick_name'),
-        ('orders', '0003_alter_cart_quantity_alter_order_message_and_more'),
+        ('order', '0003_alter_cart_quantity_alter_order_message_and_more'),
     ]
 
     operations = [
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='order',
             name='status',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='orders.orderstatus'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='order.orderstatus'),
         ),
         migrations.RemoveField(
             model_name='order',

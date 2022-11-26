@@ -8,18 +8,18 @@ class Migration(migrations.Migration):
     dependencies = [
         ('product', '0001_initial'),
         ('auth', '0001_initial'),
-        ('orders', '0001_initial'),
+        ('order', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='order',
             name='item',
-            field=models.ManyToManyField(through='orders.OrderItem', to='product.item'),
+            field=models.ManyToManyField(through='order.OrderItem', to='product.item'),
         ),
         migrations.AddField(
             model_name='order',
             name='user',
-            field=models.ManyToManyField(through='orders.OrderItem', to='users.user'),
+            field=models.ManyToManyField(through='order.OrderItem', to='users.user'),
         ),
     ]
