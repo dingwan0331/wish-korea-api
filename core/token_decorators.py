@@ -2,7 +2,7 @@ import jwt
 
 from django.http  import JsonResponse, HttpResponseRedirect
 
-from users.models       import User
+from auth.models       import User
 from wish_korea.settings import SECRET_KEY , ALGORITHM
 
 def token_decorator(func):

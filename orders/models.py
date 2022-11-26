@@ -5,7 +5,7 @@ from django.db import models
 from core.models import TimeStampModel
 
 class Cart(models.Model):
-    user     = models.ForeignKey('users.User', on_delete = models.CASCADE)
+    user     = models.ForeignKey('auth.User', on_delete = models.CASCADE)
     item     = models.ForeignKey('products.Item', on_delete = models.CASCADE)
     quantity = models.PositiveIntegerField(default = 0)
 
@@ -42,7 +42,7 @@ class Order(TimeStampModel):
     message      = models.CharField(max_length = 255, default = '')
     customer     = models.ForeignKey('Customer', on_delete = models.SET_NULL, null = True)
     status       = models.ForeignKey('OrderStatus', on_delete = models.SET_NULL, null = True)
-    user         = models.ForeignKey('users.User', on_delete = models.PROTECT, null = True)
+    user         = models.ForeignKey('auth.User', on_delete = models.PROTECT, null = True)
     item         = models.ManyToManyField(
         'products.Item', 
         through = 'OrderItem', 

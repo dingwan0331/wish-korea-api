@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_alter_user_adress_alter_user_nick_name'),
+        ('auth', '0002_alter_user_adress_alter_user_nick_name'),
         ('orders', '0003_alter_cart_quantity_alter_order_message_and_more'),
     ]
 
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='users.user'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='auth.user'),
         ),
         migrations.DeleteModel(
             name='Status',
