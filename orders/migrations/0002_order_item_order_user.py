@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0001_initial'),
+        ('product', '0001_initial'),
         ('auth', '0001_initial'),
         ('orders', '0001_initial'),
     ]
@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='item',
-            field=models.ManyToManyField(through='orders.OrderItem', to='products.item'),
+            field=models.ManyToManyField(through='orders.OrderItem', to='product.item'),
         ),
         migrations.AddField(
             model_name='order',

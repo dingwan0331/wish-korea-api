@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('products', '0001_initial'),
+        ('product', '0001_initial'),
         ('auth', '0001_initial'),
     ]
 
@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.IntegerField()),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.item')),
+                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.item')),
                 ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
             ],
@@ -88,7 +88,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.IntegerField()),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.item')),
+                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.item')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
             ],
             options={
