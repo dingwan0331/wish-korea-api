@@ -5,7 +5,7 @@ from django.views               import View
 from django.db.models           import Count, Q, Sum, Case, When, F, Prefetch
 from django.db.models.functions import Coalesce
 
-from products.models import Category, SubCategory, Product, Item, ProductComponent
+from product.models import Category, SubCategory, Product, Item, ProductComponent
 from orders.models   import Cart
 
 class CategoryView(View):

@@ -6,7 +6,7 @@ from core.models import TimeStampModel
 
 class Cart(models.Model):
     user     = models.ForeignKey('auth.User', on_delete = models.CASCADE)
-    item     = models.ForeignKey('products.Item', on_delete = models.CASCADE)
+    item     = models.ForeignKey('product.Item', on_delete = models.CASCADE)
     quantity = models.PositiveIntegerField(default = 0)
 
     class Meta:
@@ -14,7 +14,7 @@ class Cart(models.Model):
 
         
 class OrderItem(models.Model):
-    item     = models.ForeignKey('products.Item', on_delete = models.CASCADE)
+    item     = models.ForeignKey('product.Item', on_delete = models.CASCADE)
     quantity = models.PositiveIntegerField(default = 0)
     order    = models.ForeignKey('Order', on_delete = models.CASCADE)
     
@@ -44,7 +44,7 @@ class Order(TimeStampModel):
     status       = models.ForeignKey('OrderStatus', on_delete = models.SET_NULL, null = True)
     user         = models.ForeignKey('auth.User', on_delete = models.PROTECT, null = True)
     item         = models.ManyToManyField(
-        'products.Item', 
+        'product.Item', 
         through = 'OrderItem', 
         through_fields = ('order', 'item')
         )

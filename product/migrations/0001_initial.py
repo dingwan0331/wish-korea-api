@@ -68,7 +68,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('content', models.CharField(max_length=255)),
                 ('image_url', models.CharField(max_length=255)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.category')),
             ],
             options={
                 'db_table': 'sub_categories',
@@ -79,8 +79,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('important', models.BooleanField(default=False)),
-                ('component', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.component')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product')),
+                ('component', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.component')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
             ],
             options={
                 'db_table': 'product_component',
@@ -89,12 +89,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='component',
-            field=models.ManyToManyField(through='products.ProductComponent', to='products.component'),
+            field=models.ManyToManyField(through='product.ProductComponent', to='product.component'),
         ),
         migrations.AddField(
             model_name='product',
             name='sub_category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='products.subcategory'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='product.subcategory'),
         ),
         migrations.CreateModel(
             name='Item',
@@ -105,8 +105,8 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(decimal_places=2, max_digits=9)),
                 ('stock', models.IntegerField(default=0)),
                 ('image_url', models.CharField(max_length=255)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product')),
-                ('size', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='products.size')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
+                ('size', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='product.size')),
             ],
             options={
                 'db_table': 'items',
@@ -117,7 +117,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('url', models.CharField(max_length=255)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
             ],
             options={
                 'db_table': 'image_urls',
