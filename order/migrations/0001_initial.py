@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('order_number', models.UUIDField(default=uuid.uuid4)),
                 ('message', models.CharField(max_length=255)),
-                ('customer', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='orders.customer')),
+                ('customer', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='order.customer')),
             ],
             options={
                 'db_table': 'orders',
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.IntegerField()),
                 ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.item')),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
+                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='order.order')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
             ],
             options={
@@ -81,7 +81,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='status',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='orders.status'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='order.status'),
         ),
         migrations.CreateModel(
             name='Cart',
