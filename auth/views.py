@@ -8,7 +8,7 @@ from django.views           import View
 from django.core.exceptions import ValidationError
 from django.core.cache      import cache
 
-from users.models        import User
+from auth.models        import User
 from orders.models       import Cart
 from wish_korea.settings import SECRET_KEY, ALGORITHM
 from core.validators     import (

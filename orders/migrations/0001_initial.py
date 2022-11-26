@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('products', '0001_initial'),
-        ('users', '0001_initial'),
+        ('auth', '0001_initial'),
     ]
 
     operations = [
@@ -72,7 +72,7 @@ class Migration(migrations.Migration):
                 ('quantity', models.IntegerField()),
                 ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.item')),
                 ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
             ],
             options={
                 'db_table': 'order_items',
@@ -89,7 +89,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.IntegerField()),
                 ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.item')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
             ],
             options={
                 'db_table': 'carts',
