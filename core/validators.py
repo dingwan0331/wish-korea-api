@@ -2,7 +2,7 @@ import re
 
 from django.core.exceptions import ValidationError
 
-def validate_names(username, nick_name, last_name, first_name):
+def validate_names(username, nick_name, name):
     USERNAME_REGEX  = '^[가-힣a-zA-Z0-9]+$'
     NICK_NAME_REGEX = '^[가-힣a-zA-Z0-9]*$'
     NAMES_REGEX     = '^[가-힣a-zA-Z]+$'
@@ -13,11 +13,8 @@ def validate_names(username, nick_name, last_name, first_name):
     if not re.match(NICK_NAME_REGEX, nick_name):
         raise ValidationError(message = 'Invalid Nick Name')
     
-    if not re.match(NAMES_REGEX, last_name):
-        raise ValidationError(message = 'Invalid Last Name')
-    
-    if not re.match(NAMES_REGEX, first_name):
-        raise ValidationError(message = 'Invalid First Name')
+    if not re.match(NAMES_REGEX, name):
+        raise ValidationError(message = 'Invalid Name')
 
 def validate_email(value):
     EMAIL_REGEX  = '^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'

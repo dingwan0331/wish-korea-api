@@ -27,17 +27,18 @@ class SignUpView(View):
             password     = data['password']
             email        = data['email']
             phone_number = data['phone_number']
-            last_name    = data['last_name']
-            first_name   = data['first_name']
+            name         = data['name']
             nick_name    = data.get('nick_name','')
             address      = data.get('address','')
 
-            validate_names(username, nick_name, last_name, first_name)
+            validate_names(username, nick_name, name)
             validate_email(email)
             validate_phone_number(phone_number)
             validate_password(password)        
 
-            hashed_password = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt()).decode('utf-8')
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt())
+
+            print(len(hashed_password))
 
             if User.objects.filter(username = username).exists():
                 return JsonResponse({'message' : 'Duplicated username'}, status = 400)        
@@ -53,8 +54,7 @@ class SignUpView(View):
                 password     = hashed_password,
                 email        = email,
                 phone_number = phone_number,
-                last_name    = last_name,
-                first_name   = first_name,
+                name         = name,
                 nick_name    = nick_name,
                 address      = address
             )
