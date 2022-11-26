@@ -76,7 +76,7 @@ class SignInView(View):
 
             user     = User.objects.get(username = username)
 
-            if not bcrypt.checkpw(password.encode('utf-8') , user.password.encode('utf-8')):
+            if not bcrypt.checkpw(password.encode('utf-8') , user.password):
                 return JsonResponse({"message" : "Invalid User"}, status = 401)
             
             access_token  = Token('access_token').sign_token(user.id)
