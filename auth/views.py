@@ -8,13 +8,14 @@ from django.views           import View
 from django.core.exceptions import ValidationError
 
 from auth.models        import User
-from core.validators     import (
+from order.models       import Cart
+from core.token         import Token
+from core.validators    import (
     validate_names,
     validate_email,
     validate_password,
     validate_phone_number
 )
-from core.token import Token
 
 class SignUpView(View):
     def post(self, requst):
@@ -78,6 +79,8 @@ class SignInView(View):
             
             access_token  = Token('access_token').sign_token(user.id)
             refresh_token = Token('refresh_token').sign_token(user.id)
+
+            Cart.objects.filter(user_id = user.id).delete()
 
             return JsonResponse({'access_token' : access_token, 'refresh_token' : refresh_token}, status = 200)
         
