@@ -1,11 +1,11 @@
 import jwt
 
-from django.http  import JsonResponse, HttpResponseRedirect
+from django.http  import JsonResponse
 
 from auth.models       import User
 from wish_korea.settings import SECRET_KEY , ALGORITHM
 
-def token_decorator(func):
+def verify_token(func):
     def wrapper(self,request,*args,**kwargs):
         try:
             access_token = request.headers.get("Authorization",None)
@@ -22,6 +22,6 @@ def token_decorator(func):
             return JsonResponse({'message' : 'INVALID_USER'}, status=401)
 
         except jwt.exceptions.ExpiredSignatureError:
-            return HttpResponseRedirect('/users/signin')
+            return JsonResponse({'message' : 'Expire Access Token'}, status = 401)
             
     return wrapper
