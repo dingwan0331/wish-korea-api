@@ -82,11 +82,7 @@ class SignInView(View):
             access_token  = Token('access_token').sign_token(user.id)
             refresh_token = Token('refresh_token').sign_token(user.id)
 
-            cache.set(access_token,refresh_token)
-
-            Cart.objects.filter(id=user.id).delete()
-
-            return JsonResponse({'token' : access_token}, status = 200)
+            return JsonResponse({'access_token' : access_token, 'refresh_token' : refresh_token}, status = 200)
         
         except KeyError:
             return JsonResponse({'message' : 'Key Error'}, status = 400)
