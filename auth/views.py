@@ -6,11 +6,8 @@ import jwt
 from django.http            import JsonResponse
 from django.views           import View
 from django.core.exceptions import ValidationError
-from django.core.cache      import cache
 
 from auth.models        import User
-from order.models       import Cart
-from wish_korea.settings import SECRET_KEY, ALGORITHM
 from core.validators     import (
     validate_names,
     validate_email,
@@ -90,12 +87,13 @@ class SignInView(View):
         except User.DoesNotExist:
             return JsonResponse({'message' : 'Ivalid User'}, status = 401)
 
+class TokenView(View):
     def get(self, request):
         try:
-            access_token     = request.headers.get('Authorization')
-            new_access_token = Token('access_token').sign_next_token(access_token)
+            refresh_token = request.headers.get('Authorization')
+            access_token  = Token('access_token').resign_token(refresh_token)
 
-            return JsonResponse({'token' : new_access_token}, status = 200)
+            return JsonResponse({'access_token' : access_token}, status = 200)
 
-        except Exception as e:
-            return JsonResponse({'message' : 'Signin Again'}, status = 400)
+        except jwt.exceptions.ExpiredSignatureError:
+            return JsonResponse({'message' : 'Refresh Token Expire'}, status = 401)
