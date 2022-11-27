@@ -4,11 +4,11 @@ from django.http                import JsonResponse
 from django.views               import View
 from django.db.models           import Sum
 
-from order.models         import Cart
-from core.token_decorators import token_decorator
+from order.models          import Cart
+from core.token_decorators import verify_token
 
 class CartView(View):
-    @token_decorator
+    @verify_token
     def patch(self, requset):
         try:
             data                = json.loads(requset.body)
@@ -27,7 +27,7 @@ class CartView(View):
             return JsonResponse({'message' : 'Invalid Cart'}, status = 404)
 
 class CartsView(View):
-    @token_decorator
+    @verify_token
     def get(self, request):
         user   = request.user
         carts  = Cart.objects.filter(user = user)\
@@ -51,7 +51,7 @@ class CartsView(View):
             
         return JsonResponse({'result' : result}, status = 200)
 
-    @token_decorator
+    @verify_token
     def post(self, request):
         try:
             items = json.loads(request.body)['items']
@@ -70,7 +70,7 @@ class CartsView(View):
         except KeyError:
             return JsonResponse({'message' : 'Key Error'}, status = 400)
 
-    @token_decorator
+    @verify_token
     def delete(self, request):
         cart_ids   = request.GET.getlist('cart_id')
         carts      = Cart.objects.filter(id__in = cart_ids)
