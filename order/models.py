@@ -5,9 +5,10 @@ from django.db import models
 from core.models import TimeStampModel
 
 class Cart(models.Model):
-    user     = models.ForeignKey('auth.User', on_delete = models.CASCADE)
-    item     = models.ForeignKey('product.Item', on_delete = models.CASCADE)
-    quantity = models.PositiveIntegerField(default = 0)
+    user       = models.ForeignKey('auth.User', on_delete = models.CASCADE,db_index=True)
+    item       = models.ForeignKey('product.Item', on_delete = models.CASCADE)
+    quantity   = models.PositiveIntegerField(default = 0)
+    created_at = models.DateTimeField(auto_now_add = True)
 
     class Meta:
         db_table = 'carts'
