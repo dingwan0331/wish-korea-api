@@ -82,8 +82,10 @@ class SignInView(View):
 
             Cart.objects.filter(user_id = user.id).delete()
 
-            return JsonResponse({'access_token' : access_token, 'refresh_token' : refresh_token}, status = 200)
-        
+            response = JsonResponse({'access_token' : access_token}, status = 200)
+            response.set_cookie('refresh_token', value=refresh_token, httponly=True,max_age=28800)
+            return response
+
         except KeyError:
             return JsonResponse({'message' : 'Key Error'}, status = 400)
 
@@ -93,7 +95,7 @@ class SignInView(View):
 class TokenView(View):
     def get(self, request):
         try:
-            refresh_token = request.headers.get('Authorization')
+            refresh_token = request.COOKIES.get('refresh_token')
             access_token  = Token('access_token').resign_token(refresh_token)
 
             return JsonResponse({'access_token' : access_token}, status = 200)
