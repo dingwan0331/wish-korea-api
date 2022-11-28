@@ -8,7 +8,7 @@ class Cart(models.Model):
     user       = models.ForeignKey('auth.User', on_delete = models.CASCADE,db_index=True)
     item       = models.ForeignKey('product.Item', on_delete = models.CASCADE)
     quantity   = models.PositiveIntegerField(default = 0)
-    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
 
     class Meta:
         db_table = 'carts'
