@@ -1,6 +1,9 @@
 # Wish Korea
 ### [Lush Korea 방문하기](https://www.lush.co.kr)   
 ***
+
+
+
 # Introduction
 입욕제,세정제,화장품을 온라인으로 판매하는 e커머스 서비스
 * 개발 기간 : 2022년 6월 20일 ~ 2022년 7월 1일(2주간)  
